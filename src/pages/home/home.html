@@ -1,14 +1,30 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-item lines="none">
+      <ion-label style="font-weight:800; font-size: 3em;">
+        Today 
+        <p style="font-weight: 400; color: #443465;">{{ today | date:'fullDate' }}</p>
+      </ion-label>
+    </ion-item>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v3">docs</a> will be your guide.
-  </p>
+<ion-content [fullscreen]="true">
+
+  <!-- We use loop for showing content of todoList -->
+  <ion-card   *ngFor="let item of todoList">
+    <ion-card-header>
+      <ion-card-title [style.color]="item.itemPriority === 'High' ? 'red' : (item.itemPriority === 'Middle' ? 'green' : 'orange') ">
+        {{item.itemCategory}}
+      </ion-card-title>
+
+      <ion-item>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="alarm-outline"></ion-icon>
+        <ion-label>{{item.itemName}}</ion-label>
+      </ion-item>
+    </ion-card-header>
+  
+  </ion-card>
+ 
 </ion-content>
