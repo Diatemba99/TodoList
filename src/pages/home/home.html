@@ -1,26 +1,34 @@
 <ion-header>
   <ion-navbar>
     <ion-item lines="none">
-      <ion-label style="font-weight:800; font-size: 3em;">
-        Today 
-        <p style="font-weight: 400; color: #443465;">{{ today | date:'fullDate' }}</p>
+      <ion-label style="font-weight: 800; font-size: 3em">
+        Today
+        <p style="font-weight: 400; color: #443465">
+          {{ today | date:'fullDate' }}
+        </p>
       </ion-label>
     </ion-item>
   </ion-navbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
   <!-- We use loop for showing content of todoList -->
-  <ion-card   *ngFor="let item of todoList" class="ion-margin">
+  <ion-card *ngFor="let item of todoList" class="ion-margin">
     <ion-card-header>
-      <ion-card-title [style.color]="item.itemPriority === 'High' ? 'red' : (item.itemPriority === 'Middle' ? 'green' : 'orange') ">
+      <ion-card-title
+        [style.color]="item.itemPriority === 'High' ? 'red' : (item.itemPriority === 'Middle' ? 'green' : 'orange') "
+      >
         {{item.itemCategory}}
       </ion-card-title>
 
       <ion-item>
-        <!-- <ion-icon size="small" class="fas fa-address-book"></ion-icon> -->
-        <ion-label>{{item.itemName}}</ion-label>
+        <ion-label>
+          <ion-icon *ngIf="item.itemPriority === 'High' "  color= "danger" size="small" name="done-all"></ion-icon>
+          <ion-icon *ngIf="item.itemPriority === 'Middle' "  color= "warning" size="small" name="done-all"></ion-icon>
+          <ion-icon *ngIf="item.itemPriority === 'Low' "  color= "success" size="small" name="done-all"></ion-icon>
+          {{item.itemName}}
+          </ion-label
+        >
       </ion-item>
     </ion-card-header>
 
@@ -29,12 +37,32 @@
       <ion-label>Fait {{item.itemDueDate}}</ion-label>
     </ion-card-content>
 
-    <ion-row>
-      <ion-item>
-        <ion-icon name="shared"></ion-icon>
-      </ion-item>
+    <ion-row class="ml-2 ">
+      <!-- <ion-item> -->
+        <ion-icon class="pl-4" name="share"></ion-icon>
+        <p>share</p>
+      <!-- </ion-item> -->
+
+
+      <!-- <ion-item> -->
+        <ion-icon name="checkmark"></ion-icon>
+        <p>Completed</p>
+      <!-- </ion-item> -->
+
+
+      <!-- <ion-item> -->
+        <ion-icon name="trash"></ion-icon>
+        <p>Cancelled</p>
+      <!-- </ion-item> -->
+
     </ion-row>
-  
+
+
   </ion-card>
- 
+
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed"> -->
+      <!-- <ion-fab-button> -->
+          <!-- <on-icon name="add"></on-icon> -->
+      <!-- </ion-fab-button> -->
+  <!-- </ion-fab> -->
 </ion-content>
